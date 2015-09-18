@@ -21,7 +21,8 @@ var Waypoint = React.createClass({
     onLeave: PropTypes.func,
     // threshold is percentage of the height of the visible part of the
     // scrollable ancestor (e.g. 0.1)
-    threshold: PropTypes.number
+    threshold: PropTypes.number,
+    context: PropTypes.object
   },
 
   /**
@@ -67,6 +68,12 @@ var Waypoint = React.createClass({
    *   as a fallback.
    */
   _findScrollableAncestor: function _findScrollableAncestor() {
+    var context = this.props.context;
+
+    if (context) {
+      return context;
+    }
+
     var node = React.findDOMNode(this);
 
     while (node.parentNode) {
